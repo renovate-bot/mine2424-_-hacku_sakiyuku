@@ -1,0 +1,30 @@
+{
+  "kind": "identitytoolkit#DownloadAccountResponse",
+  "users": [
+    {
+      "localId": "NfUu6ppw2In3geo79slTLh93iL4A",
+      "createdAt": "1678947468240",
+      "lastLoginAt": "1678969725470",
+      "displayName": "谷崎潤一郎",
+      "photoUrl": "",
+      "passwordHash": "fakeHash:salt=fakeSalt67IkRzj5UwWiYiMaFNRD:password=tanizaki",
+      "salt": "fakeSalt67IkRzj5UwWiYiMaFNRD",
+      "passwordUpdatedAt": 1678969680556,
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "tanizaki@gmail.com",
+          "federatedId": "tanizaki@gmail.com",
+          "rawId": "tanizaki@gmail.com",
+          "displayName": "谷崎潤一郎",
+          "photoUrl": ""
+        }
+      ],
+      "validSince": "1678969680",
+      "email": "tanizaki@gmail.com",
+      "emailVerified": false,
+      "disabled": false,
+      "lastRefreshAt": "2023-03-17T11:19:18.921Z"
+    }
+  ]
+}

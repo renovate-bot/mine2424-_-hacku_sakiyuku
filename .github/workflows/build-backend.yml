@@ -1,0 +1,76 @@
+name: Build Backend
+
+on: [push]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        id: backend_cache
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.OS }}-1.19-${{ hashFiles('**/go.sum') }}
+
+      - name: Get dependencies
+        if: ${{ steps.backend_cache.outputs.cache-hit != 'true' }}
+        run: go mod download
+
+      - name: Run vet
+        run: cd ./app && go vet .
+
+      - name: Run staticcheck
+        uses: dominikh/staticcheck-action@v1
+        with:
+          version: '2022.1.2'
+          # install-go: false
+          cache-key: sakiyuku-api
+          working-directory: ./backend/app
+
+      # Docker環境が整備されたらコメント解除
+      # - name: Run hadolint
+      #   uses: hadolint/hadolint-action@v2.0.0
+      #   with:
+      #     dockerfile: Dockerfile
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        id: backend_cache
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.OS }}-1.20-${{ hashFiles('**/go.sum') }}
+
+      - name: Get dependencies
+        if: ${{ steps.backend_cache.outputs.cache-hit != 'true' }}
+        run: go mod download
+
+      - name: Run test
+        env:
+          GIN_MODE: test
+        run: cd ./app && go test -v .

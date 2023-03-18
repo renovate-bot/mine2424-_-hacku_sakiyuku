@@ -1,0 +1,13 @@
+### GET Sample
+
+GET https://sakiyuku-api-dot-sakiyuku-dev.an.r.appspot.com/student
+
+### POST sample
+
+POST http://localhost:3000/topics
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
